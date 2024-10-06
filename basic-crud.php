@@ -85,6 +85,22 @@ function crudAdminPage(){
                 <td><button id="newsubmit" name="newsubmit" type="submit">INSERT</button></td>
             </tr>
         </form>
+
+        <?php 
+        $result = $wpdb->get_results("SELECT * FROM $table_name");
+
+        foreach($result as $data){
+            ?>
+            <tr>
+                <td width="25%"><?php echo $data->user_id ; ?></td>
+                <td width="25%"><?php echo $data->name ; ?></td>
+                <td width="25%"><?php echo $data->email ; ?></td>
+                <td width="25%"><a  href="">Update</a> | <a  href="">Delete</a></td>              
+            </tr>
+            <?php
+        }
+
+?>
 </tbody>
 </table>
 </div>
