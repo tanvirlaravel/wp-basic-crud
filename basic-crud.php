@@ -54,6 +54,16 @@ function crudAdminPage(){
     global $wpdb;
     $table_name = $wpdb->prefix . 'userstable';
 
+    if(isset($_POST['newsubmit'])) {
+        $name = $_POST['newname'];
+        $email = $_POST['newemail'];
+
+        $wpdb->query(
+            "INSERT INTO $table_name(name, email)
+            VALUES('$name', '$email')
+            ");
+        echo "<script>location.replace('admin.php?page=basic-crud')</script>";
+    }
     ?>
 <div class="wrap">
 <h2>CRUD Operations</h2>
