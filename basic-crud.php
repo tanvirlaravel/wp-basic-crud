@@ -111,6 +111,16 @@ function crudAdminPage(){
            </tbody>
          </table>";
     }
+
+    // Delete 
+    if(isset($_GET['del'])){       
+        $del_id = $_GET['del'];
+       echo $del_id;
+
+    }
+
+      
+      
     ?>
 <div class="wrap">
 <h2>CRUD Operations</h2>
@@ -144,7 +154,9 @@ function crudAdminPage(){
                 <td width="25%"><?php echo $data->user_id ; ?></td>
                 <td width="25%"><?php echo $data->name ; ?></td>
                 <td width="25%"><?php echo $data->email ; ?></td>
-                <td width="25%"><a  href="<?php echo $url; ?>&upt=<?php echo $data->user_id; ?>"><button type="button">Update</button></a> | <a  href="">Delete</a></td>              
+                <td width="25%">
+                    <a  href="<?php echo $url; ?>&upt=<?php echo $data->user_id; ?>"><button type="button">Update</button></a> | 
+                    <a  href="<?php echo $url; ?>&del=<?php echo $data->user_id; ?>"><button type="button">Delete</button></a>              
             </tr>
             <?php
         }
