@@ -51,5 +51,33 @@ function addAdminPageContent(){
 }
 
 function crudAdminPage(){
-    echo "hi form admin";
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'userstable';
+
+    ?>
+<div class="wrap">
+<h2>CRUD Operations</h2>
+<table class="wp-list-table widefat striped">
+    <thead>
+        <tr>
+            <th width="25%">User ID</th>
+            <th width="25%">Name</th>
+            <th width="25%">Email Address</th>
+            <th width="25%">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <form action="" method="post">
+            <tr>
+                <td><input type="text" value="AUTO_GENERATED" disabled></td>
+                <td><input type="text" id="newname" name="newname"></td>
+                <td><input type="text" id="newemail" name="newemail"></td>
+                <td><button id="newsubmit" name="newsubmit" type="submit">INSERT</button></td>
+            </tr>
+        </form>
+</tbody>
+</table>
+</div>
+
+<?php
 }
