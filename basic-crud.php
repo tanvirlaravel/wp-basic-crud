@@ -36,5 +36,20 @@ function crudOperationTable(){
 add_action("admin_menu", "addAdminPageContent");
 
 function addAdminPageContent(){
-    echo 'hello form adeimn';
+    /*
+    add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
+    Parameters:
+    $page_title: The text displayed in the page title.
+    $menu_title: The text displayed in the menu.
+    $capability: The capability required to access the menu page.
+    $menu_slug: The unique slug for the menu page.
+    $function: The callback function that will be executed when the menu page is accessed.
+    $icon_url: The URL of the icon to be displayed in the menu.
+    $position: The position of the menu item relative to other menu items. Higher numbers appear later in the menu.
+    */
+    add_menu_page('CRUD', 'CRUD', 'manage_options', 'basic-crud', 'crudAdminPage', 'dashicons-wordpress');
+}
+
+function crudAdminPage(){
+    echo "hi form admin";
 }
