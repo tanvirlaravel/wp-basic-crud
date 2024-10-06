@@ -115,8 +115,8 @@ function crudAdminPage(){
     // Delete 
     if(isset($_GET['del'])){       
         $del_id = $_GET['del'];
-       echo $del_id;
-
+        $wpdb->query("DELETE FROM $table_name WHERE user_id='$del_id'");
+        echo "<script>location.replace('{$url}');</script>";
     }
 
       
