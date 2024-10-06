@@ -68,10 +68,48 @@ function crudAdminPage(){
         echo "<script>location.replace('admin.php?page=basic-crud')</script>";
     }
 
+    if (isset($_POST['uptsubmit'])) {
+        $id = $_POST['uptid'];
+        $name = $_POST['uptname'];
+        $email = $_POST['uptemail'];
+        $wpdb->query("UPDATE $table_name SET name='$name',email='$email' WHERE user_id='$id'");
+        echo "<script>location.replace('{$url}');</script>";
+        }
+
+    
+
     // Update data in Database
-    if(isset($_GET['upt'])){
-        echo 'updated with id: ';
-        echo $_GET['upt'];
+    if(isset($_GET['upt'])){       
+        $update_id = $_GET['upt'];
+        $result = $wpdb->get_results("SELECT * FROM  $table_name WHERE user_id = '$update_id'");
+
+        // var_dump($result);
+        foreach($result as $print){
+            $name = $print->name;
+            $email = $print->email;
+        }
+
+        echo "
+         <table class='wp-list-table widefat striped'>
+           <thead>
+             <tr>
+               <th width='25%'>User ID</th>
+               <th width='25%'>Name</th>
+               <th width='25%'>Email Address</th>
+               <th width='25%'>Actions</th>
+             </tr>
+           </thead>
+           <tbody>
+             <form action='' method='post'>
+               <tr>
+                 <td width='25%'>$print->user_id <input type='hidden' id='uptid' name='uptid' value='$print->user_id'></td>
+                 <td width='25%'><input type='text' id='uptname' name='uptname' value='$print->name'></td>
+                 <td width='25%'><input type='text' id='uptemail' name='uptemail' value='$print->email'></td>
+                 <td width='25%'><button id='uptsubmit' name='uptsubmit' type='submit'>UPDATE</button> <a href='admin.php?page=crud.php'><button type='button'>CANCEL</button></a></td>
+               </tr>
+             </form>
+           </tbody>
+         </table>";
     }
     ?>
 <div class="wrap">
