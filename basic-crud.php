@@ -52,8 +52,11 @@ function addAdminPageContent(){
 
 function crudAdminPage(){
     global $wpdb;
+    global $wp;
+    $url = home_url( $wp->request ) . "/wp-admin/admin.php?page=basic-crud";
     $table_name = $wpdb->prefix . 'userstable';
 
+    // Insert Data to database
     if(isset($_POST['newsubmit'])) {
         $name = $_POST['newname'];
         $email = $_POST['newemail'];
@@ -63,6 +66,12 @@ function crudAdminPage(){
             VALUES('$name', '$email')
             ");
         echo "<script>location.replace('admin.php?page=basic-crud')</script>";
+    }
+
+    // Update data in Database
+    if(isset($_GET['upt'])){
+        echo 'updated with id: ';
+        echo $_GET['upt'];
     }
     ?>
 <div class="wrap">
@@ -89,13 +98,15 @@ function crudAdminPage(){
         <?php 
         $result = $wpdb->get_results("SELECT * FROM $table_name");
 
+       
+
         foreach($result as $data){
             ?>
             <tr>
                 <td width="25%"><?php echo $data->user_id ; ?></td>
                 <td width="25%"><?php echo $data->name ; ?></td>
                 <td width="25%"><?php echo $data->email ; ?></td>
-                <td width="25%"><a  href="">Update</a> | <a  href="">Delete</a></td>              
+                <td width="25%"><a  href="<?php echo $url; ?>&upt=<?php echo $data->user_id; ?>"><button type="button">Update</button></a> | <a  href="">Delete</a></td>              
             </tr>
             <?php
         }
