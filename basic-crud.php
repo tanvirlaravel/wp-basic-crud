@@ -33,3 +33,8 @@ function crudOperationTable(){
     }
 }
 
+add_action("admin_menu", "addAdminPageContent");
+
+function addAdminPageContent(){
+    echo 'hello form adeimn';
+}
